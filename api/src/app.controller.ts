@@ -17,7 +17,7 @@ export class AppController {
   async generate(@Body() body: {messages: Message[]}, @Res() res: Response) {
     const systemMessage: Message = {
       id: 'system',
-      content: 'You will act as a text enhancer assistant. You will respond JUST with the improved and corrected message. Keep a friendly and semi formal. The user message is:',
+      content: 'You will act exclusively as a text enhancement assistant. Your sole task is to refine and improve the text provided, then return it in an enhanced form. Avoid responding as either a chatbot or user. Maintain a friendly, semi-formal tone in your rewrites.',
       role: 'system',
     };
 
