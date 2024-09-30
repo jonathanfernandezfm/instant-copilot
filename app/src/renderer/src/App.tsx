@@ -1,25 +1,26 @@
 import './App.css';
 import { useChat } from 'ai/react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/renderer/src/components/ui/card';
-import { Badge } from '@/renderer/src/components/ui/badge';
-import { cn } from '@/renderer/src/lib/utils';
-import { LoadingIcon } from '@/renderer/src/components/icons/loading-icon';
-import { Button } from '@/renderer/src/components/ui/button';
-import { Input } from '@/renderer/src/components/ui/input';
-import { ThemeProvider } from '@/renderer/src/providers/theme-provider';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+import { LoadingIcon } from '@/components/icons/loading-icon';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { MessageCircle, Send, Trash, WandSparkles } from 'lucide-react';
+import { API_URL } from '@/config/config';
+import { Badge } from '@/components/ui/badge';
+import { ThemeProvider } from '@/providers/theme-provider';
 
 function App() {
   const { messages, input, handleInputChange, handleSubmit, setMessages, isLoading } = useChat({
-    api: 'http://localhost:3000/generate',
+    api: API_URL,
   });
 
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div className="w-full p-6">
-        <div className="flex w-full gap-4 mb-4">
+        <div className="mb-4 flex w-full gap-4">
           <Card className="flex-1 cursor-pointer hover:bg-neutral-900">
-            <CardTitle className="p-4 mx-auto text-center">
+            <CardTitle className="mx-auto p-4 text-center">
               <div className="flex flex-col items-center justify-center gap-2 font-medium">
                 <MessageCircle size={16} />
                 Chat
@@ -27,7 +28,7 @@ function App() {
             </CardTitle>
           </Card>
           <Card className="flex-1 cursor-pointer hover:bg-neutral-900">
-            <CardTitle className="p-4 mx-auto text-center">
+            <CardTitle className="mx-auto p-4 text-center">
               <div className="flex flex-col items-center justify-center gap-2 font-medium">
                 <WandSparkles size={16} />
                 Enhancer
@@ -35,7 +36,7 @@ function App() {
             </CardTitle>
           </Card>
         </div>
-        <div className="flex flex-col mb-24 space-y-4">
+        <div className="mb-24 flex flex-col space-y-4">
           {messages.map((m) => (
             <div key={m.id} className="whitespace-pre-wrap">
               <Card>
@@ -55,7 +56,7 @@ function App() {
 
         <form onSubmit={handleSubmit} className="fixed bottom-8 box-border w-[calc(100%-48px)]">
           <div className="flex space-x-2 text-center">
-            <Input className="flex-1 p-2 rounded bg-background" value={input} placeholder="Say something..." onChange={handleInputChange} />
+            <Input className="flex-1 rounded bg-background p-2" value={input} placeholder="Say something..." onChange={handleInputChange} />
             <Button type="submit" variant="secondary" size="icon" asChild>
               <div>
                 <Send size={16} />
